@@ -12,7 +12,7 @@ Notice that num is also included in the returned array.
 */
 
 function arrayOfMultiples(/*args*/) {
-  //your code
+  //your code here
 }
 
 exports.solution = arrayOfMultiples;
