@@ -13,8 +13,21 @@ The array may contain duplicates.
 Multiple solutions can exist, any solution is sufficient to return true.
 */
 
-function canPartition( /*args*/ ) {
-  //your code
+function canPartition(arr) {
+  const zeroCount = arr.filter(x => x === 0).length;
+
+  // multiple zeros
+  if (zeroCount > 1) return true;
+  if (zeroCount === 1) {
+    // only works if totalProduct (excluding 0) is 0
+    const product = arr.reduce((prod, x) => x === 0 ? prod : prod * x, 1);
+    return product === 0;
+  }
+
+  // no zeros
+  const totalProduct = arr.reduce((prod, x) => prod * x, 1);
+
+  return arr.some(x => x !== 0 && totalProduct / x === x);
 }
 
 exports.solution = canPartition;
