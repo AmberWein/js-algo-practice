@@ -18,8 +18,18 @@ factorChain([2, 4, 6, 7, 12]) ➞ false
 factorChain([10, 1]) ➞ false
 */
 
-function factorChain( /*args*/ ) {
-  //your code
+function factorChain(arr) {
+  // edge case: empty array or only one value
+  if(arr.length < 2) return true;
+
+  for (let i = 1; i < arr.length; i++) {
+    // check if the current element is a factor of the previous element
+    if (arr[i] % arr[i - 1] !== 0) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 exports.solution = factorChain;
