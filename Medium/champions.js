@@ -35,8 +35,22 @@ champions([
 ➞ "Manchester United"
 */
 
-function champions( /*args*/ ) {
-  //your code
+function champions( footballClubs ) {
+  let winner = null;
+  let maxScore = -1;
+  let maxDiff = -1;
+
+  for (const team of footballClubs) {
+    const score = 3 * team.wins + team.draws;
+    const diff = team.scored - team.conceded;
+    if (score > maxScore || (score === maxScore &&  diff > maxDiff)) {
+      winner = team.name;
+      maxScore = score;
+      maxDiff = diff;
+    }
+  }
+
+  return winner;
 }
 
 exports.solution = champions;
