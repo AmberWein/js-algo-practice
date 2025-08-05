@@ -43,8 +43,19 @@ The today parameter will always be greater than or equal to the last date in the
 An empty array should return 0.
 */
 
-function currentStreak( /*args*/ ) {
-  //your code
+function currentStreak(today, dates) {
+  if (!Array.isArray(dates) || dates.length === 0) return 0;
+
+  const dateSet = new Set(dates.map(d => d.date));
+  let streak = 0;
+  let currentDate = new Date(today);
+
+  while (dateSet.has(currentDate.toISOString().slice(0, 10))) {
+    streak++;
+    currentDate.setDate(currentDate.getDate() - 1);
+  }
+
+  return streak;
 }
 
 exports.solution = currentStreak;
