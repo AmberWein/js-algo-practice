@@ -12,8 +12,20 @@ Round to the nearest integer.
 If the input is incorrect, return "Error".
 */
 
-function convert( /*args*/ ) {
-  //your code
+function convert (string) {
+  if (string.endsWith("°C")) {
+    const num = parseFloat(string.slice(0, -2));
+    if (isNaN(num)) return "Error";
+    const fahrenheit = Math.round(num * 9 / 5 + 32);
+    return `${fahrenheit}°F`;
+  } else if (string.endsWith("°F")) {
+    const num = parseFloat(string.slice(0, -2));
+    if (isNaN(num)) return "Error";
+    const celsius = Math.round((num - 32) * 5 / 9);
+    return `${celsius}°C`;
+  } else {
+    return "Error";
+  }
 }
 
 exports.solution = convert;
