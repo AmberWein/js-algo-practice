@@ -44,8 +44,34 @@ In a maze of size m x n, you enter at [0, 0] and exit at [m-1, n-1].
 There can be dead ends in a maze - one exit path is sufficient.
 */
 
-function canExit( /*args*/ ) {
-  //your code
+function canExit(maze) {
+
+  function dfs(row, col) {
+    const rows = maze.length;
+    const cols = maze[0].length;
+
+    // check bounds and walls
+    if (row < 0 || col < 0 || row >= maze.length || col >= maze[0].length || maze[row][col] === 1) {
+      return false;
+    }
+    
+    // reached target
+    if (row === rows-1 && col === cols-1) {
+      return true;
+    }
+
+    // marked as visited
+    maze[row][col] = 1;
+    
+    // recurisve call
+    if (dfs(row + 1, col) || dfs(row - 1, col) || dfs(row, col + 1) || dfs(row, col - 1)) {
+      return true;
+    }
+    
+    return false;
+  }
+
+  return dfs(0, 0);
 }
 
 exports.solution = canExit;
