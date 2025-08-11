@@ -51,7 +51,7 @@ function canExit(maze) {
     const cols = maze[0].length;
 
     // check bounds and walls
-    if (row < 0 || col < 0 || row >= maze.length || col >= maze[0].length || maze[row][col] === 1) {
+    if (row < 0 || col < 0 || row >= rows || col >= cols || maze[row][col] === 1) {
       return false;
     }
     
