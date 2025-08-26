@@ -14,8 +14,33 @@ Notes
 A number can consist of any number of digits, so long as the numbers are adjacent to each other, and the string has at least two of them.
 */
 
-function ascending( /*args*/ ) {
-  //your code
+function ascending(str) {
+  const n = str.length;
+
+  // try all possible lengths
+  for (let len = 1; len <= n / 2; len++) {
+    let nums = [];
+    let i = 0;
+
+    while (i < n) {
+      nums.push(Number(str.slice(i, i + len)));
+      i += len;
+    }
+
+    // check if they are consecutive
+    let isConsecutive = true;
+    for (let j = 1; j < nums.length; j++) {
+      if (nums[j] !== nums[j - 1] + 1) {
+        isConsecutive = false;
+        break;
+      }
+    }
+
+    if (isConsecutive) return true;
+  }
+  
+
+  return false;
 }
 
 exports.solution = ascending;
