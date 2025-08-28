@@ -15,8 +15,26 @@ Strings will be lowercased.
 Vowels are: a, e, i, o, u.
 */
 
-function distanceToNearestVowel(/*args*/) {
-  //your code
+function distanceToNearestVowel(str) {
+  const vowels = new Set(["a","e","i","o","u"]);
+  const n = str.length;
+  const result = new Array(n).fill(Infinity);
+
+  // Left to right
+  let lastVowel = -Infinity;
+  for (let i = 0; i < n; i++) {
+    if (vowels.has(str[i])) lastVowel = i;
+    result[i] = i - lastVowel;
+  }
+
+  // Right to left
+  lastVowel = Infinity;
+  for (let i = n - 1; i >= 0; i--) {
+    if (vowels.has(str[i])) lastVowel = i;
+    result[i] = Math.min(result[i], lastVowel - i);
+  }
+
+  return result;
 }
 
 exports.solution = distanceToNearestVowel;
