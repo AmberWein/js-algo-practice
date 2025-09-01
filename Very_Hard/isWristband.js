@@ -41,8 +41,28 @@ isWristband([
 // Part of diagonal right wristband.
 */
 
-function isWristband( /*args*/ ) {
-  //your code
+function isWristband( matrix ) {
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+
+  function isPattern(dx, dy) {
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        const ni = i + dx, nj = j + dy;
+        if ( ni >= 0 && ni < rows && nj >= 0 && nj < cols) {
+          if (matrix[i][j] != matrix[ni][nj]) return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  return (
+    isPattern(0, 1) ||  // horizontal
+    isPattern(1, 0) ||  // vertical
+    isPattern(1, 1) ||  // diagonal left (\)
+    isPattern(1, -1)    // diagonal right (/)
+  )
 }
 
 exports.solution = isWristband;
