@@ -30,8 +30,28 @@ Notes
 Test cases will containg integer and float numbers and single letters.
 */
 
-function numThenChar( /*args*/ ) {
-  //your code
+function numThenChar(arr) {
+  const flat = arr.flat();
+
+  const numbers = flat
+    .filter((x) => typeof x === "number")
+    .sort((a, b) => a - b);
+  const letters = flat.filter((x) => typeof x === "string").sort();
+
+  const sorted = [...numbers, ...letters];
+
+  const result = [];
+  let i = 0;
+
+  for (const sub of arr) {
+    const temp = [];
+    for (let j = 0; j < sub.length; j++) {
+      temp.push(sorted[i++]);
+    }
+    result.push(temp);
+  }
+
+  return result;
 }
 
 exports.solution = numThenChar;
