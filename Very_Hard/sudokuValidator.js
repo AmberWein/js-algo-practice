@@ -30,8 +30,37 @@ sudokuValidator([
 ]) ➞ false
 */
 
-function sudokuValidator(/*args*/) {
-  //your code
+function sudokuValidator(board) {
+  function isValidGroup(group) {
+    const set = new Set(group);
+    return set.size === 9 && [...set].every((n) => n >= 1 && n <= 9);
+  }
+
+  // check rows
+  for (let row of board) {
+    if (!isValidGroup(row)) return false;
+  }
+
+  // check columns
+  for (let col = 0; col < 9; col++) {
+    const column = board.map((row) => row[col]);
+    if (!isValidGroup(column)) return false;
+  }
+
+  // check 3x3 boxes
+  for (let r = 0; r < 9; r += 3) {
+    for (let c = 0; c < 9; c += 3) {
+      const box = [];
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          box.push(board[r + i][c + j]);
+        }
+      }
+      if (!isValidGroup(box)) return false;
+    }
+  }
+
+  return true;
 }
 
 exports.solution = sudokuValidator;
